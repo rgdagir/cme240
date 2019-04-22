@@ -2,7 +2,7 @@ import json
 import time
 import requests
 import pprint
-from numpy import asarray, savetxt
+from numpy import asarray, save
 
 BASE_ADDRESS = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&apikey=UCCG2CLTX6D3UJT8&outputsize=compact&datatype=json"
 
@@ -11,7 +11,7 @@ def main():
     stock_highs = []
     for i in range(len(symbols)):
         print(str(i)+"...")
-        if ((i != 0) & (i % 4 == 0)):
+        if ((i != 0) & (i % 5 == 0)):
             time.sleep(61) # sleep for a minute because alphavantage is ass
         hit_addr = BASE_ADDRESS + "&symbol=" + symbols[i]
         response = requests.get(hit_addr)
@@ -23,7 +23,7 @@ def main():
             local_highs.append(response["Time Series (Daily)"][date]["2. high"])
         stock_highs.append(local_highs)
     print(stock_highs)
-    savetxt("stock_data.csv", asarray(stock_highs), delimiter=",")
+    save("stock_data", asarray(stock_highs))
 
 if __name__ == "__main__":
     main()

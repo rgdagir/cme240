@@ -8,7 +8,7 @@ Author: Felipe Meneses
 """
 
 """
-Gets the sum of squared errors in the preices list.
+Gets the sum of squared errors in the prices list.
 args: prices (list of prices in the stock portfilio),
 market (price of the market)
 """
@@ -51,4 +51,4 @@ def getBeta(r, prices, market):
     sigma = getSigma(prices)
     vBeta = getA(prices, market)
     beta = r * (vBeta / (sigma + market*vBeta)) + sigma / (sigma + market * vBeta)
-    return betar
+    return beta
