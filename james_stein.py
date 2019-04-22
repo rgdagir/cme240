@@ -1,6 +1,5 @@
 import numpy as np
 
-
 """ 
 This program uses the James-Stein estimator
 to predict stock prices given some assumptions.
@@ -36,10 +35,10 @@ Returns the variance of a normal distribution, given
 a list of its values.
 """
 def getSigma(prices):
-    mean = np.mean(prices)
+    _mean = np.mean(prices)
     sigma = 0
     for price in prices:
-        sigma += (price - mean) ** 2
+        sigma += (price - _mean) ** 2
     return sigma / len(prices)
 
 """
