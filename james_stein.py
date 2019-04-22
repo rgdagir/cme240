@@ -60,16 +60,17 @@ args: prices (list of returns in portfolio given time),
 market (observed return of market given time), 
 r (observed return of stock given time t)
 """
-def getReturn(r, prices, market):
-    return market * getBeta(r, prices, market)
+def getReturn(r, prices, market1, market2):
+    return market2 * getBeta(r, prices, market1)
 
 """
 Returns squared error of the prediction.
 args: rs (return of stock after a time 2t), 
 prices (list of returns in portfolio given time), 
-market (observed return of market given time), 
+market1 (observed return of market given time t),
+market2 (same, but 2t), 
 r (observed return of stock given time t)
 """
-def getSquaredError(rs, r, prices, market):
-    return (rs - getReturn(r, prices, market))**2
+def getSquaredError(rs, r, prices, market1, market2):
+    return (rs - getReturn(r, prices, market1, market2))**2
 
