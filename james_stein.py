@@ -44,11 +44,32 @@ def getSigma(prices):
 
 """
 Returns the beta of a stock.
-args: prices (list of prices in portfolio), 
-market (observed market price), r (observed price)
+args: prices (list of returns in portfolio given time), 
+market (observed return of market given time), 
+r (observed return of stock given time)
 """
 def getBeta(r, prices, market):
     sigma = getSigma(prices)
     vBeta = getA(prices, market)
     beta = r * (vBeta / (sigma + market*vBeta)) + sigma / (sigma + market * vBeta)
     return beta
+
+"""
+Returns the predicted returns given previous returns.
+args: prices (list of returns in portfolio given time), 
+market (observed return of market given time), 
+r (observed return of stock given time t)
+"""
+def getReturn(r, prices, market):
+    return market * getBeta(r, prices, market)
+
+"""
+Returns squared error of the prediction.
+args: rs (return of stock after a time 2t), 
+prices (list of returns in portfolio given time), 
+market (observed return of market given time), 
+r (observed return of stock given time t)
+"""
+def getSquaredError(rs, r, prices, market):
+    return (rs - getReturn(r, prices, market))**2
+
